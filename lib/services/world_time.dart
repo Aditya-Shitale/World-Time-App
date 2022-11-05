@@ -10,8 +10,8 @@ class WorldTime {
   WorldTime({required this.location,required this.flag,required this.url});
 
  Future<void> getTime() async {
-
- Response response =await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
+   try {
+      Response response =await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
 
  
  Map data = jsonDecode(response.body);
@@ -29,6 +29,13 @@ now = now.add(Duration(hours: int.parse(offset)));
 
 //set time property
 time=now.toString();
+   } catch (e) {
+     print('caught error: $e');
+     time="could not get time data";
+   }
+
+
+
 
 }
 }
