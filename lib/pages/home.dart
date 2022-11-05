@@ -36,8 +36,16 @@ Map data ={};
           padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
           child: Column(children: [
             ElevatedButton.icon(
-              onPressed: (){
-                Navigator.pushNamed(context,'/location');
+              onPressed: () async{
+             dynamic result= await Navigator.pushNamed(context,'/location');
+             setState(() {
+               data={
+                'time': result['time'],
+                'location': result['location'],
+                'isDaytime': result['isDaytime'],
+                'flag': result['flag']
+               };
+             });
               },
                icon: Icon(
                 Icons.edit_location,
